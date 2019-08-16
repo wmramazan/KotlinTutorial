@@ -18,10 +18,10 @@ import retrofit2.http.GET
  */
 interface KotlinTutorialService {
     @GET("notification")
-    fun getNotifications(): Deferred<ServiceResponse<List<Notification>>>
+    fun getNotificationsAsync(): Deferred<ServiceResponse<List<Notification>>>
 
     @GET("post")
-    fun getPosts(): Deferred<ServiceResponse<List<Post>>>
+    fun getPostsAsync(): Deferred<ServiceResponse<List<Post>>>
 }
 
 object KotlinTutorialNetwork {
