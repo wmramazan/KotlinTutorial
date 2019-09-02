@@ -1,9 +1,11 @@
 package com.adnagu.kotlintutorial.model
 
+import androidx.room.ColumnInfo
 import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.adnagu.kotlintutorial.util.base.DateModel
+import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
 /**
@@ -25,5 +27,7 @@ data class Post(
 data class User(
     val name: String,
     val nickname: String,
+    @ColumnInfo(name = "profile_image")
+    @Json(name = "profile_image")
     val profileImageUrl: String
 )

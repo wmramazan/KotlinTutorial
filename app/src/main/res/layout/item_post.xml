@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable name="post" type="com.adnagu.kotlintutorial.model.Post"/>
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_item"
+            android:layout_marginBottom="@dimen/spacing_tiny"
+            android:layout_marginStart="@dimen/spacing_item"
+            android:layout_marginEnd="@dimen/spacing_item"
+            app:cardCornerRadius="@dimen/spacing_item"
+            app:cardElevation="4dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/spacing_small">
+
+            <ImageView
+                    android:id="@+id/post_profile_image"
+                    android:layout_width="@dimen/profile_image_size"
+                    android:layout_height="@dimen/profile_image_size"
+                    android:contentDescription="@string/profile_image"
+                    tools:srcCompat="@android:drawable/btn_star"
+                    app:url="@{post.user.profileImageUrl}"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
+            <TextView
+                    android:id="@+id/post_profile_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_gravity="center_vertical"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:text="@{post.user.name}"
+                    tools:text="Ramazan Vapurcu"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toEndOf="@+id/post_profile_image"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+            <TextView
+                    android:id="@+id/post_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                    android:text="@{post.post}"
+                    android:textSize="14sp"
+                    tools:text="Hi everyone!"
+                    app:layout_constraintTop_toBottomOf="@+id/post_profile_name"
+                    app:layout_constraintStart_toStartOf="@+id/post_profile_name"/>
+
+            <TextView
+                    android:id="@+id/post_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_gravity="center_vertical"
+                    android:text="@{post.dateString}"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                    android:textSize="15sp"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/post_profile_name"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    tools:text="1 minute ago" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+</layout>

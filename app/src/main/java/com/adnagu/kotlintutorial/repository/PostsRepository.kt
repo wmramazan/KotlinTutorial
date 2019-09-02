@@ -22,6 +22,8 @@ class PostsRepository(private val dao: PostDao) {
 
             val response = KotlinTutorialNetwork.service.getPostsAsync().await()
 
+            // TODO: Check success of response
+
             response.data?.apply {
                 dao.deleteAll()
                 dao.insertAll(this)

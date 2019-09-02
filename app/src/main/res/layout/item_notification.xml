@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable name="notification" type="com.adnagu.kotlintutorial.model.Notification"/>
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_item"
+            android:layout_marginBottom="@dimen/spacing_tiny"
+            android:layout_marginStart="@dimen/spacing_item"
+            android:layout_marginEnd="@dimen/spacing_item"
+            app:cardCornerRadius="@dimen/spacing_item"
+            app:cardElevation="4dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/spacing_small">
+
+            <ImageView
+                    android:id="@+id/notification_icon"
+                    android:layout_width="@dimen/notification_icon_size"
+                    android:layout_height="@dimen/notification_icon_size"
+                    android:contentDescription="@string/notification_icon"
+                    app:srcCompat="@drawable/ic_notification"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
+            <TextView
+                    android:id="@+id/notification_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_gravity="center_vertical"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:text="@{notification.title}"
+                    tools:text="New Message"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toEndOf="@+id/notification_icon"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+            <TextView
+                    android:id="@+id/notification_description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                    android:text="@{notification.description}"
+                    android:textSize="14sp"
+                    tools:text="wmramazan: Hi"
+                    app:layout_constraintTop_toBottomOf="@+id/notification_title"
+                    app:layout_constraintStart_toStartOf="@+id/notification_title"/>
+
+            <TextView
+                    android:id="@+id/notification_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_gravity="center_vertical"
+                    android:text="@{notification.dateString}"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                    android:textSize="15sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="1 minute ago" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+</layout>

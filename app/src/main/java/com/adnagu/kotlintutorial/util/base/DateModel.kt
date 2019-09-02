@@ -1,6 +1,6 @@
 package com.adnagu.kotlintutorial.util.base
 
-import java.text.SimpleDateFormat
+import android.text.format.DateUtils
 import java.util.*
 
 /**
@@ -13,8 +13,7 @@ interface DateModel {
 
     val dateString: String
         get() {
-            val format = SimpleDateFormat("MM-dd-yyyy HH:mm", Locale.getDefault())
-            return format.format(date)
+            return DateUtils.getRelativeTimeSpanString(date).toString()
         }
 
     val dateObject: Date

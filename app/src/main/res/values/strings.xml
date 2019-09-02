@@ -2,4 +2,8 @@
     <string name="app_name">KotlinTutorial</string>
     <string name="posts">Posts</string>
     <string name="notifications">Notifications</string>
+    <string name="profile_image">Profile Image</string>
+    <string name="notification_icon">Notification Icon</string>
+    <string name="network_error">Network Error</string>
+    <string name="try_again">Try again</string>
 </resources>

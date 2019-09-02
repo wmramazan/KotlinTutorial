@@ -22,6 +22,8 @@ class NotificationsRepository(private val dao: NotificationDao) {
 
             val response = KotlinTutorialNetwork.service.getNotificationsAsync().await()
 
+            // TODO: Check success of response
+
             response.data?.apply {
                 dao.deleteAll()
                 dao.insertAll(this)

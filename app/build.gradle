@@ -21,6 +21,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    dataBinding {
+        enabled = true
+    }
 }
 
 dependencies {
@@ -76,7 +79,7 @@ dependencies {
     kapt 'com.github.bumptech.glide:compiler:4.9.0'
 
     // Room dependency
-    def room_version = "2.2.0-alpha02"
+    def room_version = "2.2.0-beta01"
     implementation "androidx.room:room-runtime:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
 }
