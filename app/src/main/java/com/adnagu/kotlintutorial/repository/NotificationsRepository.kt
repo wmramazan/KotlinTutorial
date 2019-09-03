@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import com.adnagu.kotlintutorial.database.NotificationDao
 import com.adnagu.kotlintutorial.model.Notification
 import com.adnagu.kotlintutorial.network.KotlinTutorialNetwork
+import com.adnagu.kotlintutorial.network.NetworkException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import timber.log.Timber
@@ -22,11 +23,13 @@ class NotificationsRepository(private val dao: NotificationDao) {
 
             val response = KotlinTutorialNetwork.service.getNotificationsAsync().await()
 
-            // TODO: Check success of response
-
-            response.data?.apply {
-                dao.deleteAll()
-                dao.insertAll(this)
+            if (response.success) {
+                response.data?.apply {
+                    dao.deleteAll()
+                    dao.insertAll(this)
+                }
+            } else {
+                throw NetworkException(response.message)
             }
         }
     }

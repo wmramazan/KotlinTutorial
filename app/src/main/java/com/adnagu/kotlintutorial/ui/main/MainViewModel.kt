@@ -2,7 +2,9 @@ package com.adnagu.kotlintutorial.ui.main
 
 import android.app.Application
 import androidx.lifecycle.*
+import com.adnagu.kotlintutorial.R
 import com.adnagu.kotlintutorial.database.getDatabase
+import com.adnagu.kotlintutorial.network.NetworkException
 import com.adnagu.kotlintutorial.repository.NotificationsRepository
 import com.adnagu.kotlintutorial.repository.PostsRepository
 import kotlinx.coroutines.CoroutineScope
@@ -24,11 +26,13 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val posts = postsRepository.posts
     val notifications = notificationsRepository.notifications
 
+    private val defaultError = application.getString(R.string.network_error)
+
     private val viewModelJob = SupervisorJob()
     private val viewModelScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
-    private var _eventNetworkError = MutableLiveData(false)
-    val eventNetworkError: LiveData<Boolean>
+    private var _eventNetworkError = MutableLiveData<String>(null)
+    val eventNetworkError: LiveData<String>
         get() = _eventNetworkError
 
     private var _isNetworkErrorShown = MutableLiveData(false)
@@ -46,15 +50,16 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     fun refreshDataFromRepositories() {
         viewModelScope.launch {
             try {
-                _eventNetworkError.value = false
+                _eventNetworkError.value = null
                 _isNetworkErrorShown.value = false
                 _isSuccessfulRefresh.value = false
                 postsRepository.refreshPosts()
                 notificationsRepository.refreshNotifications()
             } catch (e: Exception) {
                 e.printStackTrace()
-                if (posts.value!!.isEmpty() || notifications.value!!.isEmpty())
-                    _eventNetworkError.value = true
+
+                _eventNetworkError.value = if (e is NetworkException) e.message
+                    else defaultError
             }
         }
     }

@@ -4,7 +4,6 @@ import com.adnagu.kotlintutorial.model.Notification
 import com.adnagu.kotlintutorial.model.Post
 import com.adnagu.kotlintutorial.util.Constants
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
-import com.squareup.moshi.JsonClass
 import kotlinx.coroutines.Deferred
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -23,6 +22,8 @@ interface KotlinTutorialService {
     @GET("post")
     fun getPostsAsync(): Deferred<ServiceResponse<List<Post>>>
 }
+
+class NetworkException(message: String?) : Exception(message)
 
 object KotlinTutorialNetwork {
 

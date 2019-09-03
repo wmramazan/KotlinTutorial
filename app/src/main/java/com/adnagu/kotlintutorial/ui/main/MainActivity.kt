@@ -55,14 +55,16 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
-        viewModel.eventNetworkError.observe(this, Observer<Boolean> { isNetworkError ->
-            if (isNetworkError) onNetworkError()
+        viewModel.eventNetworkError.observe(this, Observer<String> { error ->
+            error?.apply {
+                onNetworkError()
+            }
         })
     }
 
     private fun onNetworkError() {
         if (!viewModel.isNetworkErrorShown.value!!) {
-            Snackbar.make(binding.root, R.string.network_error, Snackbar.LENGTH_INDEFINITE)
+            Snackbar.make(binding.root, viewModel.eventNetworkError.value!!, Snackbar.LENGTH_INDEFINITE)
                 .setAction(R.string.try_again) {
                     viewModel.refreshDataFromRepositories()
                 }.show()

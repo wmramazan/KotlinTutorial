@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import com.adnagu.kotlintutorial.database.PostDao
 import com.adnagu.kotlintutorial.model.Post
 import com.adnagu.kotlintutorial.network.KotlinTutorialNetwork
+import com.adnagu.kotlintutorial.network.NetworkException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import timber.log.Timber
@@ -22,11 +23,13 @@ class PostsRepository(private val dao: PostDao) {
 
             val response = KotlinTutorialNetwork.service.getPostsAsync().await()
 
-            // TODO: Check success of response
-
-            response.data?.apply {
-                dao.deleteAll()
-                dao.insertAll(this)
+            if (response.success) {
+                response.data?.apply {
+                    dao.deleteAll()
+                    dao.insertAll(this)
+                }
+            } else {
+                throw NetworkException(response.message)
             }
         }
     }

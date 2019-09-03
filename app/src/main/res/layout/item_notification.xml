@@ -65,8 +65,8 @@
                     android:text="@{notification.dateString}"
                     android:textAppearance="@style/TextAppearance.AppCompat.Caption"
                     android:textSize="15sp"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/notification_title"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
                     tools:text="1 minute ago" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

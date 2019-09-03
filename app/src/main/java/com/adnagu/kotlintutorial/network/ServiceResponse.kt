@@ -9,6 +9,6 @@ import com.squareup.moshi.JsonClass
 @JsonClass(generateAdapter = true)
 data class ServiceResponse<T : Any>(
     val data: T?,
-    val success: Boolean?,
+    val success: Boolean = false,
     val message: String?
 )
